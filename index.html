@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ATSDopi — Open Source Projects</title>
+<meta name="description" content="Open-source projects by ATSDopi: student discounts list, dev tools, security scanners, self-hosted apps, browser utilities and more.">
+<style>
+  :root { --bg:#0d1117; --card:#161b22; --border:#30363d; --text:#e6edf3; --dim:#8b949e; --accent:#58a6ff; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:var(--bg); color:var(--text); font-family:'Segoe UI',system-ui,sans-serif; min-height:100vh; }
+  .container { max-width:960px; margin:0 auto; padding:48px 24px; }
+  h1 { font-size:2.4rem; margin-bottom:8px; }
+  h1 span { color:var(--accent); }
+  .sub { color:var(--dim); font-size:1.1rem; margin-bottom:40px; }
+  .grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(290px,1fr)); gap:16px; }
+  a.card { display:block; background:var(--card); border:1px solid var(--border); border-radius:10px; padding:20px; text-decoration:none; color:var(--text); transition:border-color .15s, transform .15s; }
+  a.card:hover { border-color:var(--accent); transform:translateY(-2px); }
+  .card h2 { font-size:1.05rem; margin-bottom:6px; }
+  .card p { color:var(--dim); font-size:.88rem; line-height:1.45; }
+  .tag { display:inline-block; font-size:.72rem; color:var(--accent); border:1px solid var(--accent); border-radius:20px; padding:2px 10px; margin-top:12px; }
+  .featured { border-color:#238636; }
+  .featured .tag { color:#3fb950; border-color:#3fb950; }
+  footer { margin-top:48px; color:var(--dim); font-size:.85rem; text-align:center; }
+  footer a { color:var(--accent); }
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>ATSDopi <span>— Open Source</span></h1>
+  <p class="sub">Dev tools, security scanners, self-hosted apps and free student resources.</p>
+
+  <div class="grid">
+    <a class="card featured" href="https://github.com/ATSDopi/TheStudentRepo">
+      <h2>🎓 Student Offers</h2>
+      <p>The ultimate student resource list — 300+ discounts, credits, freebies and free tools, sorted by category and country, with verification methods.</p>
+      <span class="tag">Featured · Browse the site</span>
+    </a>
+    <a class="card" href="https://atsdopi.github.io/LLMify/">
+      <h2>LLMify</h2>
+      <p>Generate a structured llms.txt for any codebase — drag & drop a folder, 100% local, zero setup.</p>
+      <span class="tag">Live demo</span>
+    </a>
+    <a class="card" href="https://atsdopi.github.io/CodeShot/">
+      <h2>CodeShot</h2>
+      <p>Turn code snippets into beautiful shareable images — syntax highlighting, gradients, PNG export.</p>
+      <span class="tag">Live demo</span>
+    </a>
+    <a class="card" href="https://github.com/ATSDopi/HeadSeaker">
+      <h2>HeadSeeker</h2>
+      <p>Interactive TUI that scans HTTP security headers and grades sites A+→F with remediation snippets.</p>
+      <span class="tag">Python · Security</span>
+    </a>
+    <a class="card" href="https://github.com/ATSDopi/Auto-Desk">
+      <h2>Auto Desktop</h2>
+      <p>Launch your whole work environment in one click — app presets, files, URLs, scripts (Electron).</p>
+      <span class="tag">Windows · Electron</span>
+    </a>
+    <a class="card" href="https://github.com/ATSDopi/vaultkeeper">
+      <h2>VaultKeeper</h2>
+      <p>Local-first, zero-knowledge password manager — AES-256-GCM, optional self-hosted sync.</p>
+      <span class="tag">Security · Self-hosted</span>
+    </a>
+    <a class="card" href="https://github.com/ATSDopi/uptime-wolf">
+      <h2>UptimeWolf</h2>
+      <p>Lightweight self-hosted uptime monitor — HTTP/TCP/ping checks, incidents, Slack/webhook alerts.</p>
+      <span class="tag">Monitoring · Docker</span>
+    </a>
+    <a class="card" href="https://github.com/ATSDopi/devpulse">
+      <h2>DevPulse</h2>
+      <p>Developer productivity dashboard — commits, PRs and metrics across GitHub, GitLab, Bitbucket.</p>
+      <span class="tag">Dashboard · Self-hosted</span>
+    </a>
+    <a class="card" href="https://github.com/ATSDopi/SplitSmart">
+      <h2>SplitSmart</h2>
+      <p>Split expenses with friends, track balances, settle up — self-hosted Splitwise alternative.</p>
+      <span class="tag">Finance · Docker</span>
+    </a>
+    <a class="card" href="https://github.com/ATSDopi/HabitFlow">
+      <h2>HabitFlow</h2>
+      <p>Self-hosted habit tracker with streaks, GitHub-style heatmap and weekly stats.</p>
+      <span class="tag">Productivity</span>
+    </a>
+    <a class="card" href="https://github.com/ATSDopi/markdown-to-slides">
+      <h2>md2slides</h2>
+      <p>Turn Markdown into interactive slide decks — Mermaid, themes, speaker notes, PDF export.</p>
+      <span class="tag">CLI · Dev tool</span>
+    </a>
+    <a class="card" href="https://github.com/ATSDopi/guns-view">
+      <h2>guns-view</h2>
+      <p>Educational Electron app exploring browser automation, anti-bot systems and proxy management.</p>
+      <span class="tag">Automation · Educational</span>
+    </a>
+  </div>
+
+  <footer>
+    <a href="https://github.com/ATSDopi">github.com/ATSDopi</a>
+  </footer>
+</div>
+</body>
+</html>
