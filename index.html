@@ -7,35 +7,51 @@
 <meta name="description" content="All open-source projects by ATSDopi: OSINT and security tools, dev utilities, Electron desktop apps, self-hosted services and free student resources.">
 <link rel="canonical" href="https://atsdopi.github.io/">
 <meta name="robots" content="index,follow">
+<meta name="theme-color" content="#0d1117">
+<link rel="icon" href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="14" fill="%230d1117"/><rect x="1.5" y="1.5" width="61" height="61" rx="12.5" fill="none" stroke="%2358a6ff" stroke-width="3"/><text x="32" y="41" font-family="Consolas,monospace" font-size="19" font-weight="bold" fill="%2358a6ff" text-anchor="middle" letter-spacing="1">ATS</text></svg>'>
 <meta property="og:type" content="website">
 <meta property="og:title" content="ATSDopi — Open Source Projects">
 <meta property="og:description" content="OSINT & security tools, dev utilities, desktop apps, self-hosted services and free student resources.">
 <meta property="og:url" content="https://atsdopi.github.io/">
+<meta property="og:image" content="https://atsdopi.github.io/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
 <style>
   :root { --bg:#0d1117; --card:#161b22; --border:#30363d; --text:#e6edf3; --dim:#8b949e; --accent:#58a6ff; --green:#3fb950; }
   * { margin:0; padding:0; box-sizing:border-box; }
   body { background:var(--bg); color:var(--text); font-family:'Segoe UI',system-ui,sans-serif; min-height:100vh; }
-  .container { max-width:960px; margin:0 auto; padding:48px 24px; }
+  .container { max-width:960px; margin:0 auto; padding:48px 24px 32px; }
   h1 { font-size:2.4rem; margin-bottom:8px; }
   h1 span { color:var(--accent); }
-  .sub { color:var(--dim); font-size:1.1rem; margin-bottom:40px; }
+  .sub { color:var(--dim); font-size:1.1rem; margin-bottom:28px; }
+  .filters { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:32px; }
+  .chip { background:var(--card); color:var(--dim); border:1px solid var(--border); border-radius:20px; padding:5px 14px; font-size:.8rem; cursor:pointer; transition:all .15s; font-family:inherit; }
+  .chip:hover { border-color:var(--accent); color:var(--text); }
+  .chip.active { background:var(--accent); border-color:var(--accent); color:#0d1117; font-weight:600; }
   section { margin-bottom:40px; }
-  section h3 { font-size:.8rem; text-transform:uppercase; letter-spacing:.12em; color:var(--dim); border-bottom:1px solid var(--border); padding-bottom:8px; margin-bottom:16px; }
+  section h2 { font-size:.8rem; text-transform:uppercase; letter-spacing:.12em; color:var(--dim); border-bottom:1px solid var(--border); padding-bottom:8px; margin-bottom:16px; font-weight:600; }
   .grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(290px,1fr)); gap:16px; }
-  .card { display:flex; flex-direction:column; background:var(--card); border:1px solid var(--border); border-radius:10px; padding:20px; transition:border-color .15s; }
-  .card:hover { border-color:var(--accent); }
-  .card h2 { font-size:1.05rem; margin-bottom:6px; }
-  .card h2 a { color:var(--text); text-decoration:none; }
-  .card h2 a:hover { color:var(--accent); }
+  .card { display:flex; flex-direction:column; background:var(--card); border:1px solid var(--border); border-radius:10px; padding:20px; transition:border-color .15s, transform .15s; }
+  .card:hover { border-color:var(--accent); transform:translateY(-2px); }
+  .card:focus-within { border-color:var(--accent); }
+  .card h3 { font-size:1.05rem; margin-bottom:6px; }
+  .card h3 a { color:var(--text); text-decoration:none; }
+  .card h3 a:hover, .card h3 a:focus { color:var(--accent); }
   .card p { color:var(--dim); font-size:.88rem; line-height:1.45; flex:1; }
-  .foot { display:flex; align-items:center; justify-content:space-between; margin-top:12px; }
-  .tag { display:inline-block; font-size:.72rem; color:var(--accent); border:1px solid var(--accent); border-radius:20px; padding:2px 10px; }
+  .foot { display:flex; align-items:center; justify-content:space-between; gap:8px; margin-top:12px; }
+  .tag { display:inline-block; font-size:.72rem; color:var(--accent); border:1px solid var(--accent); border-radius:20px; padding:2px 10px; white-space:nowrap; }
+  .meta { display:flex; align-items:center; gap:4px; margin-left:auto; }
+  .stars { color:#e3b341; font-size:.8rem; font-weight:600; display:none; margin-right:8px; white-space:nowrap; }
   .links a { color:var(--dim); font-size:.8rem; text-decoration:none; margin-left:12px; }
-  .links a:hover { color:var(--accent); }
+  .links a:hover, .links a:focus { color:var(--accent); }
   .featured { border-color:#238636; }
+  .featured:hover { border-color:var(--green); }
   .featured .tag { color:var(--green); border-color:var(--green); }
-  footer { margin-top:48px; color:var(--dim); font-size:.85rem; text-align:center; }
-  footer a { color:var(--accent); }
+  footer { margin-top:48px; padding-top:24px; border-top:1px solid var(--border); color:var(--dim); font-size:.85rem; text-align:center; }
+  footer a { color:var(--accent); text-decoration:none; }
+  footer a:hover { text-decoration:underline; }
+  @media (prefers-reduced-motion:reduce) { .card { transition:none; } .card:hover { transform:none; } }
 </style>
 <script type="application/ld+json">
 {
@@ -46,17 +62,21 @@
     {"@type":"ListItem","position":1,"item":{"@type":"SoftwareSourceCode","name":"TheStudentRepo","codeRepository":"https://github.com/ATSDopi/TheStudentRepo","url":"https://atsdopi.github.io/TheStudentRepo/","description":"The ultimate student resource list — discounts, credits, freebies and free tools sorted by category and country."}},
     {"@type":"ListItem","position":2,"item":{"@type":"SoftwareSourceCode","name":"The Eye","codeRepository":"https://github.com/ATSDopi/The-Eye","description":"Free self-hosted OSINT toolkit — 6 800+ sites scanned, zero paid APIs.","programmingLanguage":"Python"}},
     {"@type":"ListItem","position":3,"item":{"@type":"SoftwareSourceCode","name":"HeadSeeker","codeRepository":"https://github.com/ATSDopi/HeadSeaker","description":"Interactive cyberpunk TUI that scans HTTP security headers and grades sites A+ to F.","programmingLanguage":"Python"}},
-    {"@type":"ListItem","position":4,"item":{"@type":"SoftwareSourceCode","name":"VaultKeeper","codeRepository":"https://github.com/ATSDopi/vaultkeeper","description":"Local-first, zero-knowledge password manager — AES-256-GCM + PBKDF2, optional self-hosted sync.","programmingLanguage":"TypeScript"}},
-    {"@type":"ListItem","position":5,"item":{"@type":"SoftwareSourceCode","name":"CodeShot","codeRepository":"https://github.com/ATSDopi/CodeShot","url":"https://atsdopi.github.io/CodeShot/","description":"Turn code snippets into beautiful shareable images — single HTML file, 100% client-side."}},
-    {"@type":"ListItem","position":6,"item":{"@type":"SoftwareSourceCode","name":"LLMify","codeRepository":"https://github.com/ATSDopi/LLMify","url":"https://atsdopi.github.io/LLMify/","description":"Generate a structured llms.txt for any codebase — drag & drop, 100% local."}},
-    {"@type":"ListItem","position":7,"item":{"@type":"SoftwareSourceCode","name":"md2slides","codeRepository":"https://github.com/ATSDopi/markdown-to-slides","description":"Turn Markdown into interactive slide decks — Mermaid, themes, speaker notes, PDF export.","programmingLanguage":"TypeScript"}},
-    {"@type":"ListItem","position":8,"item":{"@type":"SoftwareSourceCode","name":"Auto Desktop","codeRepository":"https://github.com/ATSDopi/Auto-Desk","description":"Launch your whole work environment in one click — app/file/URL presets for Windows.","programmingLanguage":"TypeScript"}},
-    {"@type":"ListItem","position":9,"item":{"@type":"SoftwareSourceCode","name":"Mail Sorter AI","codeRepository":"https://github.com/ATSDopi/ATS-Mail-Sorter","description":"Automatic Gmail sorting by AI — 6 free providers, model rotation, automatic failover.","programmingLanguage":"TypeScript"}},
-    {"@type":"ListItem","position":10,"item":{"@type":"SoftwareSourceCode","name":"guns-view","codeRepository":"https://github.com/ATSDopi/guns-view","description":"Educational Electron app exploring browser automation, anti-bot systems and proxy management.","programmingLanguage":"JavaScript"}},
+    {"@type":"ListItem","position":4,"item":{"@type":"SoftwareSourceCode","name":"ATS-OPSEC-Suite","codeRepository":"https://github.com/ATSDopi/ATS-OPSEC-Suite","description":"File-centric OPSEC toolkit — cinematic TUI, post-quantum crypto, steganography.","programmingLanguage":"Rust"}},
+    {"@type":"ListItem","position":5,"item":{"@type":"SoftwareSourceCode","name":"VaultKeeper","codeRepository":"https://github.com/ATSDopi/vaultkeeper","description":"Local-first, zero-knowledge password manager — AES-256-GCM + PBKDF2, optional self-hosted sync.","programmingLanguage":"TypeScript"}},
+    {"@type":"ListItem","position":6,"item":{"@type":"SoftwareSourceCode","name":"CodeShot","codeRepository":"https://github.com/ATSDopi/CodeShot","url":"https://atsdopi.github.io/CodeShot/","description":"Turn code snippets into beautiful shareable images — single HTML file, 100% client-side."}},
+    {"@type":"ListItem","position":7,"item":{"@type":"SoftwareSourceCode","name":"LLMify","codeRepository":"https://github.com/ATSDopi/LLMify","url":"https://atsdopi.github.io/LLMify/","description":"Generate a structured llms.txt for any codebase — drag & drop, 100% local."}},
+    {"@type":"ListItem","position":8,"item":{"@type":"SoftwareSourceCode","name":"md2slides","codeRepository":"https://github.com/ATSDopi/markdown-to-slides","description":"Turn Markdown into interactive slide decks — Mermaid, themes, speaker notes, PDF export.","programmingLanguage":"TypeScript"}},
+    {"@type":"ListItem","position":9,"item":{"@type":"SoftwareSourceCode","name":"Auto Desktop","codeRepository":"https://github.com/ATSDopi/Auto-Desk","description":"Launch your whole work environment in one click — app/file/URL presets for Windows.","programmingLanguage":"TypeScript"}},
+    {"@type":"ListItem","position":10,"item":{"@type":"SoftwareSourceCode","name":"Mail Sorter AI","codeRepository":"https://github.com/ATSDopi/ATS-Mail-Sorter","description":"Automatic Gmail sorting by AI — 6 free providers, model rotation, automatic failover.","programmingLanguage":"TypeScript"}},
     {"@type":"ListItem","position":11,"item":{"@type":"SoftwareSourceCode","name":"UptimeWolf","codeRepository":"https://github.com/ATSDopi/uptime-wolf","description":"Lightweight self-hosted uptime monitor — HTTP/TCP/ping checks, incidents, alerts.","programmingLanguage":"TypeScript"}},
     {"@type":"ListItem","position":12,"item":{"@type":"SoftwareSourceCode","name":"DevPulse","codeRepository":"https://github.com/ATSDopi/devpulse","description":"Developer productivity dashboard — commits, PRs and metrics across GitHub, GitLab, Bitbucket.","programmingLanguage":"TypeScript"}},
     {"@type":"ListItem","position":13,"item":{"@type":"SoftwareSourceCode","name":"HabitFlow","codeRepository":"https://github.com/ATSDopi/HabitFlow","description":"Self-hosted habit tracker with streaks, GitHub-style heatmap and weekly stats.","programmingLanguage":"TypeScript"}},
-    {"@type":"ListItem","position":14,"item":{"@type":"SoftwareSourceCode","name":"SplitSmart","codeRepository":"https://github.com/ATSDopi/SplitSmart","description":"Split expenses with friends, track balances, settle up — self-hosted Splitwise alternative.","programmingLanguage":"TypeScript"}}
+    {"@type":"ListItem","position":14,"item":{"@type":"SoftwareSourceCode","name":"SplitSmart","codeRepository":"https://github.com/ATSDopi/SplitSmart","description":"Split expenses with friends, track balances, settle up — self-hosted Splitwise alternative.","programmingLanguage":"TypeScript"}},
+    {"@type":"ListItem","position":15,"item":{"@type":"SoftwareSourceCode","name":"ATS-AIMER","codeRepository":"https://github.com/ATSDopi/ATS-AIMER","description":"Post-match aim and sensitivity analyzer for Valorant — biomechanical metrics, sensitivity recommendations.","programmingLanguage":"Rust"}},
+    {"@type":"ListItem","position":16,"item":{"@type":"SoftwareSourceCode","name":"Fieldwatch","codeRepository":"https://github.com/ATSDopi/Fieldwatch","description":"Receive-only Wi-Fi and Bluetooth LE observer for Android.","programmingLanguage":"Kotlin"}},
+    {"@type":"ListItem","position":17,"item":{"@type":"SoftwareSourceCode","name":"amiibo-factory","codeRepository":"https://github.com/ATSDopi/amiibo-factory","description":"Amiibo .bin/.nfc database and factory-fresh regeneration toolkit.","programmingLanguage":"Python"}},
+    {"@type":"ListItem","position":18,"item":{"@type":"SoftwareSourceCode","name":"blitz-adblock","codeRepository":"https://github.com/ATSDopi/blitz-adblock","description":"Ad-block and cosmetic cleanup patcher for the Blitz.gg desktop app.","programmingLanguage":"PowerShell"}}
   ]
 }
 </script>
@@ -66,109 +86,171 @@
   <h1>ATSDopi <span>— Open Source</span></h1>
   <p class="sub">OSINT &amp; security tools, dev utilities, desktop apps, self-hosted services and free student resources.</p>
 
-  <section>
-    <h3>Featured</h3>
+  <nav class="filters" aria-label="Filter projects by category">
+    <button class="chip active" data-f="all">All</button>
+    <button class="chip" data-f="security">Security &amp; OSINT</button>
+    <button class="chip" data-f="devtools">Dev tools</button>
+    <button class="chip" data-f="desktop">Desktop apps</button>
+    <button class="chip" data-f="selfhosted">Self-hosted</button>
+    <button class="chip" data-f="misc">Experiments</button>
+  </nav>
+
+  <section data-cat="featured">
+    <h2>Featured</h2>
     <div class="grid">
       <div class="card featured">
-        <h2><a href="https://atsdopi.github.io/TheStudentRepo/">🎓 Student Offers</a></h2>
+        <h3><a href="https://atsdopi.github.io/TheStudentRepo/">🎓 Student Offers</a></h3>
         <p>The ultimate student resource list — 300+ discounts, credits, freebies and free tools worth $25k+, sorted by category and country, with the verification method for each offer.</p>
-        <div class="foot"><span class="tag">Featured</span><span class="links"><a href="https://github.com/ATSDopi/TheStudentRepo">Repo</a><a href="https://atsdopi.github.io/TheStudentRepo/">Site</a></span></div>
+        <div class="foot"><span class="tag">Featured</span><span class="meta"><span class="stars" data-repo="TheStudentRepo" title="GitHub stars"></span><span class="links"><a href="https://github.com/ATSDopi/TheStudentRepo">Repo</a><a href="https://atsdopi.github.io/TheStudentRepo/">Site</a></span></span></div>
       </div>
     </div>
   </section>
 
-  <section>
-    <h3>Security &amp; OSINT</h3>
+  <section data-cat="security">
+    <h2>Security &amp; OSINT</h2>
     <div class="grid">
       <div class="card">
-        <h2><a href="https://github.com/ATSDopi/The-Eye">The Eye</a></h2>
+        <h3><a href="https://github.com/ATSDopi/The-Eye">The Eye</a></h3>
         <p>Free self-hosted OSINT toolkit — find where a username, email, domain, IP, phone or wallet leaves traces online. 6 800+ sites scanned, zero paid APIs, built-in false-positive detection.</p>
-        <div class="foot"><span class="tag">Python · OSINT</span><span class="links"><a href="https://github.com/ATSDopi/The-Eye">Repo</a></span></div>
+        <div class="foot"><span class="tag">Python · OSINT</span><span class="meta"><span class="stars" data-repo="The-Eye" title="GitHub stars"></span><span class="links"><a href="https://github.com/ATSDopi/The-Eye">Repo</a></span></span></div>
       </div>
       <div class="card">
-        <h2><a href="https://github.com/ATSDopi/HeadSeaker">HeadSeeker</a></h2>
+        <h3><a href="https://github.com/ATSDopi/HeadSeaker">HeadSeeker</a></h3>
         <p>Interactive cyberpunk TUI that scans HTTP security headers, grades sites A+→F and gives Nginx/Apache remediation snippets + JSON export.</p>
-        <div class="foot"><span class="tag">Python · Security</span><span class="links"><a href="https://github.com/ATSDopi/HeadSeaker">Repo</a></span></div>
+        <div class="foot"><span class="tag">Python · Security</span><span class="meta"><span class="stars" data-repo="HeadSeaker" title="GitHub stars"></span><span class="links"><a href="https://github.com/ATSDopi/HeadSeaker">Repo</a></span></span></div>
       </div>
       <div class="card">
-        <h2><a href="https://github.com/ATSDopi/vaultkeeper">VaultKeeper</a></h2>
+        <h3><a href="https://github.com/ATSDopi/ATS-OPSEC-Suite">OPSEC Suite</a></h3>
+        <p>File-centric OPSEC toolkit — cinematic TUI to encrypt, shred, hide and inspect files. Post-quantum crypto (ML-KEM), steganography, metadata scrubbing.</p>
+        <div class="foot"><span class="tag">Rust · OPSEC</span><span class="meta"><span class="stars" data-repo="ATS-OPSEC-Suite" title="GitHub stars"></span><span class="links"><a href="https://github.com/ATSDopi/ATS-OPSEC-Suite">Repo</a></span></span></div>
+      </div>
+      <div class="card">
+        <h3><a href="https://github.com/ATSDopi/vaultkeeper">VaultKeeper</a></h3>
         <p>Local-first, zero-knowledge password manager — AES-256-GCM + PBKDF2 encryption, optional self-hosted sync.</p>
-        <div class="foot"><span class="tag">TypeScript · Encryption</span><span class="links"><a href="https://github.com/ATSDopi/vaultkeeper">Repo</a></span></div>
+        <div class="foot"><span class="tag">TypeScript · Encryption</span><span class="meta"><span class="stars" data-repo="vaultkeeper" title="GitHub stars"></span><span class="links"><a href="https://github.com/ATSDopi/vaultkeeper">Repo</a></span></span></div>
       </div>
     </div>
   </section>
 
-  <section>
-    <h3>Dev tools</h3>
+  <section data-cat="devtools">
+    <h2>Dev tools</h2>
     <div class="grid">
       <div class="card">
-        <h2><a href="https://atsdopi.github.io/CodeShot/">CodeShot</a></h2>
+        <h3><a href="https://atsdopi.github.io/CodeShot/">CodeShot</a></h3>
         <p>Turn code snippets into beautiful shareable images — macOS-style window, syntax highlighting, gradients, PNG export. Single HTML file, 100% client-side.</p>
-        <div class="foot"><span class="tag">HTML · No build</span><span class="links"><a href="https://github.com/ATSDopi/CodeShot">Repo</a><a href="https://atsdopi.github.io/CodeShot/">Demo</a></span></div>
+        <div class="foot"><span class="tag">HTML · No build</span><span class="meta"><span class="stars" data-repo="CodeShot" title="GitHub stars"></span><span class="links"><a href="https://github.com/ATSDopi/CodeShot">Repo</a><a href="https://atsdopi.github.io/CodeShot/">Demo</a></span></span></div>
       </div>
       <div class="card">
-        <h2><a href="https://atsdopi.github.io/LLMify/">LLMify</a></h2>
+        <h3><a href="https://atsdopi.github.io/LLMify/">LLMify</a></h3>
         <p>Generate a structured llms.txt for any codebase — drag &amp; drop a folder, smart filtering, 100% local, zero setup.</p>
-        <div class="foot"><span class="tag">HTML · No build</span><span class="links"><a href="https://github.com/ATSDopi/LLMify">Repo</a><a href="https://atsdopi.github.io/LLMify/">Demo</a></span></div>
+        <div class="foot"><span class="tag">HTML · No build</span><span class="meta"><span class="stars" data-repo="LLMify" title="GitHub stars"></span><span class="links"><a href="https://github.com/ATSDopi/LLMify">Repo</a><a href="https://atsdopi.github.io/LLMify/">Demo</a></span></span></div>
       </div>
       <div class="card">
-        <h2><a href="https://github.com/ATSDopi/markdown-to-slides">md2slides</a></h2>
+        <h3><a href="https://github.com/ATSDopi/markdown-to-slides">md2slides</a></h3>
         <p>Turn Markdown into interactive slide decks — Mermaid diagrams, 6 themes, speaker notes, PDF export, live-reload server. CLI + Docker.</p>
-        <div class="foot"><span class="tag">TypeScript · CLI</span><span class="links"><a href="https://github.com/ATSDopi/markdown-to-slides">Repo</a></span></div>
+        <div class="foot"><span class="tag">TypeScript · CLI</span><span class="meta"><span class="stars" data-repo="markdown-to-slides" title="GitHub stars"></span><span class="links"><a href="https://github.com/ATSDopi/markdown-to-slides">Repo</a></span></span></div>
       </div>
     </div>
   </section>
 
-  <section>
-    <h3>Desktop apps</h3>
+  <section data-cat="desktop">
+    <h2>Desktop apps</h2>
     <div class="grid">
       <div class="card">
-        <h2><a href="https://github.com/ATSDopi/Auto-Desk">Auto Desktop</a></h2>
+        <h3><a href="https://github.com/ATSDopi/Auto-Desk">Auto Desktop</a></h3>
         <p>Launch your whole work environment in one click — presets for apps, files, folders, URLs and scripts. Auto-discovery, scheduled tasks, FR/EN glassmorphism UI.</p>
-        <div class="foot"><span class="tag">Electron · Windows</span><span class="links"><a href="https://github.com/ATSDopi/Auto-Desk">Repo</a></span></div>
+        <div class="foot"><span class="tag">Electron · Windows</span><span class="meta"><span class="stars" data-repo="Auto-Desk" title="GitHub stars"></span><span class="links"><a href="https://github.com/ATSDopi/Auto-Desk">Repo</a></span></span></div>
       </div>
       <div class="card">
-        <h2><a href="https://github.com/ATSDopi/ATS-Mail-Sorter">Mail Sorter AI</a></h2>
+        <h3><a href="https://github.com/ATSDopi/ATS-Mail-Sorter">Mail Sorter AI</a></h3>
         <p>Automatic Gmail sorting by AI — categorizes, labels and archives your inbox using 6 free AI providers with model rotation and automatic failover.</p>
-        <div class="foot"><span class="tag">Electron · AI</span><span class="links"><a href="https://github.com/ATSDopi/ATS-Mail-Sorter">Repo</a></span></div>
-      </div>
-      <div class="card">
-        <h2><a href="https://github.com/ATSDopi/guns-view">guns-view</a></h2>
-        <p>Educational Electron app exploring browser automation, anti-bot systems and proxy management — drives real browser views on guns.lol profiles.</p>
-        <div class="foot"><span class="tag">Automation · Educational</span><span class="links"><a href="https://github.com/ATSDopi/guns-view">Repo</a></span></div>
+        <div class="foot"><span class="tag">Electron · AI</span><span class="meta"><span class="stars" data-repo="ATS-Mail-Sorter" title="GitHub stars"></span><span class="links"><a href="https://github.com/ATSDopi/ATS-Mail-Sorter">Repo</a></span></span></div>
       </div>
     </div>
   </section>
 
-  <section>
-    <h3>Self-hosted apps</h3>
+  <section data-cat="selfhosted">
+    <h2>Self-hosted apps</h2>
     <div class="grid">
       <div class="card">
-        <h2><a href="https://github.com/ATSDopi/uptime-wolf">UptimeWolf</a></h2>
+        <h3><a href="https://github.com/ATSDopi/uptime-wolf">UptimeWolf</a></h3>
         <p>Lightweight self-hosted uptime monitor — HTTP/TCP/ping checks, incident tracking, Slack/webhook/email alerts. Uptime Kuma alternative.</p>
-        <div class="foot"><span class="tag">Monitoring · Docker</span><span class="links"><a href="https://github.com/ATSDopi/uptime-wolf">Repo</a></span></div>
+        <div class="foot"><span class="tag">Monitoring · Docker</span><span class="meta"><span class="stars" data-repo="uptime-wolf" title="GitHub stars"></span><span class="links"><a href="https://github.com/ATSDopi/uptime-wolf">Repo</a></span></span></div>
       </div>
       <div class="card">
-        <h2><a href="https://github.com/ATSDopi/devpulse">DevPulse</a></h2>
+        <h3><a href="https://github.com/ATSDopi/devpulse">DevPulse</a></h3>
         <p>Developer productivity dashboard — unified commits, PRs, issues and coding metrics across GitHub, GitLab and Bitbucket.</p>
-        <div class="foot"><span class="tag">Dashboard · Docker</span><span class="links"><a href="https://github.com/ATSDopi/devpulse">Repo</a></span></div>
+        <div class="foot"><span class="tag">Dashboard · Docker</span><span class="meta"><span class="stars" data-repo="devpulse" title="GitHub stars"></span><span class="links"><a href="https://github.com/ATSDopi/devpulse">Repo</a></span></span></div>
       </div>
       <div class="card">
-        <h2><a href="https://github.com/ATSDopi/HabitFlow">HabitFlow</a></h2>
+        <h3><a href="https://github.com/ATSDopi/HabitFlow">HabitFlow</a></h3>
         <p>Self-hosted habit tracker with streaks, GitHub-style heatmap calendar and weekly stats.</p>
-        <div class="foot"><span class="tag">Productivity · Docker</span><span class="links"><a href="https://github.com/ATSDopi/HabitFlow">Repo</a></span></div>
+        <div class="foot"><span class="tag">Productivity · Docker</span><span class="meta"><span class="stars" data-repo="HabitFlow" title="GitHub stars"></span><span class="links"><a href="https://github.com/ATSDopi/HabitFlow">Repo</a></span></span></div>
       </div>
       <div class="card">
-        <h2><a href="https://github.com/ATSDopi/SplitSmart">SplitSmart</a></h2>
+        <h3><a href="https://github.com/ATSDopi/SplitSmart">SplitSmart</a></h3>
         <p>Split expenses with friends, track balances and settle up easily — self-hosted Splitwise/Tricount alternative.</p>
-        <div class="foot"><span class="tag">Finance · Docker</span><span class="links"><a href="https://github.com/ATSDopi/SplitSmart">Repo</a></span></div>
+        <div class="foot"><span class="tag">Finance · Docker</span><span class="meta"><span class="stars" data-repo="SplitSmart" title="GitHub stars"></span><span class="links"><a href="https://github.com/ATSDopi/SplitSmart">Repo</a></span></span></div>
+      </div>
+    </div>
+  </section>
+
+  <section data-cat="misc">
+    <h2>Experiments &amp; misc</h2>
+    <div class="grid">
+      <div class="card">
+        <h3><a href="https://github.com/ATSDopi/ATS-AIMER">ATS-AIMER</a></h3>
+        <p>Post-match aim &amp; sensitivity analyzer for Valorant — video capture + raw input → biomechanical metrics → data-driven sensitivity recommendations.</p>
+        <div class="foot"><span class="tag">Rust · Game analytics</span><span class="meta"><span class="stars" data-repo="ATS-AIMER" title="GitHub stars"></span><span class="links"><a href="https://github.com/ATSDopi/ATS-AIMER">Repo</a></span></span></div>
+      </div>
+      <div class="card">
+        <h3><a href="https://github.com/ATSDopi/Fieldwatch">Fieldwatch</a></h3>
+        <p>Receive-only Wi-Fi and Bluetooth LE observer for Android — passive radio monitoring that never transmits, built for privacy research.</p>
+        <div class="foot"><span class="tag">Kotlin · Android</span><span class="meta"><span class="stars" data-repo="Fieldwatch" title="GitHub stars"></span><span class="links"><a href="https://github.com/ATSDopi/Fieldwatch">Repo</a></span></span></div>
+      </div>
+      <div class="card">
+        <h3><a href="https://github.com/ATSDopi/amiibo-factory">Amiibo tools</a></h3>
+        <p>Amiibo .bin/.nfc database plus factory-fresh regeneration toolkit — rebuild clean dumps for Flipper Zero and NFC research.</p>
+        <div class="foot"><span class="tag">Python · NFC</span><span class="meta"><span class="stars" data-repo="amiibo-factory" title="GitHub stars"></span><span class="links"><a href="https://github.com/ATSDopi/amiibo-factory">Repo</a><a href="https://github.com/ATSDopi/Amiibo">DB</a></span></span></div>
+      </div>
+      <div class="card">
+        <h3><a href="https://github.com/ATSDopi/blitz-adblock">blitz-adblock</a></h3>
+        <p>Ad-block + cosmetic cleanup patcher for the Blitz.gg desktop app — survives app updates, one-command PowerShell patch.</p>
+        <div class="foot"><span class="tag">PowerShell · Patcher</span><span class="meta"><span class="stars" data-repo="blitz-adblock" title="GitHub stars"></span><span class="links"><a href="https://github.com/ATSDopi/blitz-adblock">Repo</a></span></span></div>
       </div>
     </div>
   </section>
 
   <footer>
-    14 projects · <a href="https://github.com/ATSDopi">github.com/ATSDopi</a>
+    18 projects · <a href="https://github.com/ATSDopi">github.com/ATSDopi</a> · <a href="https://guns.lol/initial">guns.lol</a>
   </footer>
 </div>
+
+<script>
+// Category filter — hides/shows whole sections, no build needed
+const chips = document.querySelectorAll('.chip');
+const sections = document.querySelectorAll('section[data-cat]');
+chips.forEach(chip => chip.addEventListener('click', () => {
+  chips.forEach(c => c.classList.remove('active'));
+  chip.classList.add('active');
+  const f = chip.dataset.f;
+  sections.forEach(s => {
+    s.style.display = (f === 'all' || s.dataset.cat === f) ? '' : 'none';
+  });
+}));
+
+// Live star counts — one public API call, silent fallback if rate-limited
+fetch('https://api.github.com/users/ATSDopi/repos?per_page=100')
+  .then(r => r.ok ? r.json() : Promise.reject(r.status))
+  .then(repos => {
+    const stars = {};
+    repos.forEach(r => stars[r.name] = r.stargazers_count);
+    document.querySelectorAll('.stars[data-repo]').forEach(el => {
+      const n = stars[el.dataset.repo];
+      if (n > 0) { el.textContent = '\u2605 ' + n; el.style.display = 'inline'; }
+    });
+  })
+  .catch(() => {});
+</script>
 </body>
 </html>
